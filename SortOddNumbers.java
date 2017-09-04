@@ -16,48 +16,24 @@ public class SortOddNumbers{
 		int[] tempArr = new int[arr.length];
 
 		int i = 0;
-
-		//i = first index of even numbers
-		//j = first index of odd numbers after i 
-		int j = i + 1;
-
+		int j = 0;
 		int k = 0;
-
 
 		while(i < arr.length){
 
-			// Find the first index of an even number
-			while(arr[i] % 2 == 1){
-				i++;
+			
+			if(arr[i] % 2 == 1){
+				arr[j++] = arr[i];
+			}else{
+				tempArr[k++] = arr[i];
 			}
-
-			if(i < arr.length){
-				
-				j = i + 1;
-
-				// copy even number to temp array
-				tempArr[k] = arr[i];
-				k++;
-				
-				// find the first index of odd number after i
-				while(j < arr.length && arr[j] % 2 == 0){
-					j++;
-				}
-
-				// copy the odd number to the even number index
-				if(j < arr.length)
-					arr[i] = arr[j];
-
-				i++;
-			}
-
+			i++;
 		}
 
 		// copy elements from temp array back to main array
 		i = 0;
-		while(i < k){
-			arr[arr.length - 1 - i] = tempArr[k - 1 - i];
-			i++; 
+		while(j < arr.length){
+			arr[j++] = tempArr[i++]; 
 		}
 
 		System.out.println(Arrays.toString(arr));
@@ -72,17 +48,17 @@ public class SortOddNumbers{
 		int j = arr.length - 1;
 
 		//i = first index of even numbers
-		//j = last idnex of odd numbers
+		//j = last index of odd numbers
 		
 		while(i < j){
 
 			// find the first index of off even number
-			while(arr[i] % 2 != 0){
+			while(arr[i] % 2 != 0 && i < j){
 				i++;
 			}
 
 			// find the last index of odd number
-			while(arr[j] % 2 == 0){
+			while(arr[j] % 2 == 0 && i < j){
 				j--;
 			}
 

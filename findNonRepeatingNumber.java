@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class findNonRepeatingNumber{
+public class FindNonRepeatingNumber{
 
 	public static void main(String args[]){
 

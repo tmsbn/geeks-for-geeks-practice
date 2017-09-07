@@ -50,7 +50,7 @@ public class SearchInPivotedArray{
 		}
 
 		if(found){
-			System.out.println("Array was found at " + mid);
+			System.out.println("Element was found at " + mid);
 		}else{
 			System.out.println("Element was not found");
 		}

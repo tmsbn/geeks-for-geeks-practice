@@ -11,8 +11,11 @@ public class QuickSort{
 
 	public static int partition(int arr[], int low , int high){
 
-		int i = low - 1;
+		int i = low - 1; 
 		int pivot = high;
+
+		// elements from arr[low] to arr[i] will be less than or equal to pivot
+		// elements from arr[i + 1] to arr[j] will be greater than pivot
 
 		for(int j = low; j < high; j++){
 			

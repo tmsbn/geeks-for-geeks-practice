@@ -2,13 +2,13 @@ public class SearchInPivotedArray{
 
 	public static void main(String args[]){
 
-		int arr[] = {14, 15, 16, 1, 2, 3, 6 ,7 , 8};
+		int arr[] = {10, 1, 2, 7, 8, 9};
 
 		int mid = 0;
 		int low = 0;
 		int high = arr.length - 1;
 
-		int search = 17;
+		int search = 1;
 
 		boolean found = false;	
 
@@ -37,10 +37,10 @@ public class SearchInPivotedArray{
 				else{
 
 					// The search elmt may be the right or left side of mid
-					if(arr[mid] > arr[low]){
-						high = mid - 1; 
-					}else{
+					if(arr[mid] < arr[low]){
 						low = mid + 1;
+					}else{
+						high = mid - 1;
 					}
 				}
 			}else{

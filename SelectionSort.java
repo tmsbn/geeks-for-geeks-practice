@@ -15,7 +15,7 @@ public class SelectionSort{
 		// we need only n - 1 passes to sort n elements
 		for(int i = 0; i < arr.length - 1; i++){
 
-			int min_idx = arr[i];
+			int min_idx = i;
 			for(int j = i + 1; j < arr.length; j++){
 
 				if(arr[min_idx] > arr[j]){

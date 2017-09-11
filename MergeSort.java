@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MergeSort{
 
 	public void sort(int[] arr, int low, int high){
@@ -15,8 +17,8 @@ public class MergeSort{
 
 	public void merge(int[] arr, int low, int high, int mid){
 
-		l1 = mid - lower + 1;
-		l2 = high - mid;
+		int l1 = mid - low + 1;
+		int l2 = high - mid;
 
 		int[] lower = new int[l1]; // including mid
 		int[] higher = new int[l2]; // excluding mid
@@ -33,7 +35,7 @@ public class MergeSort{
 		int j = 0;
 		int k = 0;
 
-		while(i < (l1 + l2)){
+		while(j < l1 && k < l2){
 
 			if(lower[j] < higher[k]){
 				arr[i] = lower[j++];
@@ -55,8 +57,9 @@ public class MergeSort{
 
 	public static void main(String args[]){
 
-		int arr[] = {5, 6, 1, 3, 5, 10 2};
-		sort(arr, 0 , arr.length - 1);
+		int arr[] = {5, 6, 1, 3, 5, 10, 2};
+		new MergeSort().sort(arr, 0 , arr.length - 1);
+		System.out.println(Arrays.toString(arr));
 
 	}
 }

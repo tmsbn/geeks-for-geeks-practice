@@ -13,7 +13,6 @@ public class QuickSort{
 	public int partition(int[] arr, int low, int high){
 
 		int pivot = high;
-		System.out.println(pivot);
 		int length = high - low;
 		int i = low;
 		int w = low;
@@ -37,7 +36,7 @@ public class QuickSort{
 
 		if(low < high){
 
-			System.out.println(Arrays.toString(arr));
+		
 			int pivot = partition(arr, low, high);
 			sort(arr, low, pivot - 1);
 			sort(arr, pivot + 1, high);

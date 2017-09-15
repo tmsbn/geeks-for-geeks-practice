@@ -29,7 +29,7 @@ public class QuickSort{
 		}
 		//swap(arr, i, pivot);
 
-		return i;
+		return i - 1;
 	}
 
 	public void sort(int[] arr, int low, int high){

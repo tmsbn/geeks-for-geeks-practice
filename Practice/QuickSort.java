@@ -17,7 +17,7 @@ public class QuickSort{
 		int i = low;
 		int w = low;
 
-		while(w < high){
+		while(w <= high){
 
 			if(arr[pivot] >= arr[w]){
 				swap(arr, i, w);
@@ -27,7 +27,7 @@ public class QuickSort{
 			
 
 		}
-		swap(arr, i, pivot);
+		//swap(arr, i, pivot);
 
 		return i;
 	}

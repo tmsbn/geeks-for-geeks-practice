@@ -14,6 +14,48 @@ public class LinkedList{
 		}
 	}
 
+	public void moveNode(LinkedList linkedList){
+
+		Node node = linkedList.pop();
+		node.next = head;
+		head = node;
+
+	}
+
+	public void reverse(){
+
+		if (head == null || head.next == null)
+			return;
+
+		Node head2 = null;
+
+		while(head != null){
+
+			Node temp = head;
+			head = head.next;
+			temp.next = head2;
+			head2 = temp;
+		}
+
+		head = head2;
+	}
+
+
+	public void splitIntoLists(LinkedList linkedList){
+
+		int count = 0;
+
+		Node temp = head;
+		while(temp != null){
+
+			if (count % 2 == 1){
+
+			}
+			temp = temp.next;
+			count ++;
+		}
+	}
+
 	public LinkedList splitList(){
 
 		LinkedList newList = new LinkedList();
@@ -166,6 +208,41 @@ public class LinkedList{
 		return count;
 	}
 
+	public void mergeLinkedLists(Node head2){
+
+		Node head1 = head;
+		if(head1 != null && head2 != null){
+
+			Node dummy = new Node(-1);
+			Node tail = dummy;
+
+			while(true){
+
+				if(head1 == null){
+					tail.next = head2;
+					break;
+
+				}else if(head2 == null){
+					tail.next = head1;
+					break;
+
+				}else{
+
+					tail.next = head1;
+					head1 = head1.next;
+					tail = tail.next;
+
+					tail.next = head2;
+					head2 = head2.next;
+					tail = tail.next;
+				}
+			}
+
+			head = dummy.next;
+			dummy = null;
+		}
+	}
+
 	public void swap(Node n1, Node n2){
 
 		int temp = n1.value;
@@ -189,7 +266,7 @@ public class LinkedList{
 		}
 
 		temp2.next = null;
-		temp2 = tail;
+		tail = temp2;
 	}
 
 	public Node pop(){
@@ -212,13 +289,14 @@ public class LinkedList{
 
 		LinkedList linkedList1 = new LinkedList();
 		LinkedList linkedList2 = new LinkedList();
-		linkedList1.insertMany(new int[]{8, 8, 8, 3, 3, 3});
-		// linkedList2.insertMany(new int[]{6, 2, 1, 3, 5, 6});
-		// linkedList1.append(linkedList2);
-		// linkedList1.print();
-		linkedList1.removeDuplicates();
+		linkedList1.pushMany(new int[]{1, 2, 5, 6, 7});
+		linkedList2.pushMany(new int[]{9, 4});
+
+		linkedList1.mergeLinkedLists(linkedList2.head);
+
 		linkedList1.print();
-		//splitList.print();
+
+		
 
 	}
 }

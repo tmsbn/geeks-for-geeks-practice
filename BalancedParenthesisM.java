@@ -55,7 +55,7 @@ public class BalancedParenthesisM{
 
 	public static void main(String[] args){
 
-		String parenthesis = "{[[()}";
+		String parenthesis = "{}";
 		BalancedParenthesisM.Stack stack = new BalancedParenthesisM.Stack();
 
 		char[] arr = parenthesis.toCharArray();

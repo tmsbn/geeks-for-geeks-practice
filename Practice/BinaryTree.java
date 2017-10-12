@@ -72,13 +72,23 @@ public class BinaryTree{
 					break;
 			}else {
 
-				System.out.print(currentNode.value + " ");
+				if(currentNode.value != -1)
+					System.out.print(currentNode.value + " ");
+				else
+					System.out.print(" ");
 
-				if(currentNode.left != null)
-					nodes.add(currentNode.left);
+				if(currentNode.left != null || currentNode.right != null){
+					if(currentNode.left != null)
+						nodes.add(currentNode.left);
+					else
+						nodes.add(new Node(-1));
 
-				if(currentNode.right!= null)
-					nodes.add(currentNode.right);
+					if(currentNode.right!= null)
+						nodes.add(currentNode.right);
+					else
+						nodes.add(new Node(-1));
+				}
+
 			}
 
 		}
@@ -107,23 +117,24 @@ public class BinaryTree{
 		Node temp = root;
 		Queue<Node> nodes = new LinkedList<Node>();
 		nodes.add(root);
-		nodes.add(null);
-		int count = 0;
+
+		int depth = 0;
+		int count =  0;
+
 		while(!nodes.isEmpty()){
 
+			if(count == 0)
+				count = nodes.size();
+
 			Node currentNode = nodes.remove();
-			if(currentNode == null){
-				count++;
-				if(nodes.size() > 0){
-					nodes.add(null);
-				}else{
-					break;
-				}
-			}else{
-				if(currentNode.left != null)
-					nodes.add(currentNode.left);
-				else if(currentNode.right != null)
-					nodes.add(currentNode.right);
+			count--;
+
+			if(currentNode.left != null){
+				nodes.add(currentNode.left);
+			}
+
+			if(currentNode.right != null){
+				nodes.add(currentNode.right)
 			}
 		}
 
@@ -143,23 +154,78 @@ public class BinaryTree{
 		}
 	}
 
-	private boolean hasPathSumRe(Node node, int sum, int targetSum){
+	private boolean hasPathSumRe(Node node, int targetSum){
 
 		if(node == null)
 			return false;
 		else{
-			if(node.value + sum == targetSum){
+			if(targetSum - node.value == 0){
 				return true;
 			}else{
-				sum = sum + node.value;
-				return hasPathSumRe(node.left, sum, targetSum) || hasPathSumRe(node.right, sum, targetSum);
+				return hasPathSumRe(node.left, targetSum - node.value) || hasPathSumRe(node.right, targetSum - node.value);
 			}
+		}
+	}
+
+	public void mirror(){
+
+		mirrorRe(root);
+	}
+
+	public void mirrorRe(Node node){
+
+		if(node == null)
+			return;
+		else{
+			mirrorRe(node.left);
+			mirrorRe(node.right);
+
+			Node temp = node.left;
+			node.left = node.right;
+			node.right = temp;
+		}
+
+	}
+
+	public boolean sameTree(BinaryTree binaryTree){
+		return sameTreeRe(root, binaryTree.root);
+	}
+
+	private boolean sameTreeRe(Node node1, Node node2){
+
+		if(node1 == null && node2 == null){
+			return true;
+		}else if(node1 != null && node2 != null){
+
+			return node1.value == node2.value && sameTreeRe(node1.left, node2.left)
+				&& sameTreeRe(node1.right, node2.right);
+		}else{
+			return false;
+		}
+	}
+
+	public void doubleTree(){
+		 doubleTreeRe(root);
+	}
+
+	public void doubleTreeRe(Node node){
+
+		if(node == null){
+			return;
+		}else{
+
+			doubleTreeRe(node.left);
+			doubleTreeRe(node.right);
+
+			Node temp = node.left;
+			node.left = new Node(node.value);
+			node.left.left = temp;
 		}
 	}
 
 	public boolean hasPathSum(int targetSum){
 
-		return hasPathSumRe(root, 0, targetSum);
+		return hasPathSumRe(root, targetSum);
 	}
 
 	public int minValue(){
@@ -179,15 +245,21 @@ public class BinaryTree{
 	public static void main(String[] args){
 
 		BinaryTree binaryTree = new BinaryTree();
+		BinaryTree binaryTree2 = new BinaryTree();
+
 		binaryTree.insertMany(new int[]{0, 6, 5, 7, 3});
+		binaryTree2.insertMany(new int[]{0, 6, 5, 7});
+
 		binaryTree.print();
 		System.out.println("Size is " + binaryTree.size());
 		System.out.println("The depth is:" + binaryTree.getMaxDepthRe(binaryTree.root));
 		System.out.println("Minimum value is:" + binaryTree.minValue());
 
 		int sum = 8;
-		System.out.println("A path sum of " + sum + ":" + binaryTree.hasPathSum(11));
+		System.out.println("A path sum of " + sum + ":" + binaryTree.hasPathSum(sum));
 
+		
+		System.out.println(binaryTree.sameTree(binaryTree2));
 
 	}
 }
